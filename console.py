@@ -207,9 +207,9 @@ class HBNBCommand(cmd.Cmd):
 
     #chagne this to
         try:
-            if not line:
+            if not args:
                 raise SyntaxError()
-            my_list = line.split(" ")
+            my_list = args.split(" ")
             if my_list[0] not in self.all_classes:
                 raise NameError()
             if len(my_list) < 2:
