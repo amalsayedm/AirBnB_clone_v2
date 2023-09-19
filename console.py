@@ -247,7 +247,7 @@ class HBNBCommand(cmd.Cmd):
             return
         try:
             line = args.split(" ")
-            if line[0] not in self.__classes:
+            if line[0] not in self.classes:
                 raise NameError()
 
             o = storage.all(eval(args[0]))
