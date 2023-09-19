@@ -216,12 +216,12 @@ class TestConsole(unittest.TestCase):
         my_id = obj[obj.find('(')+1:obj.find(')')]
         with patch('sys.stdout', new=StringIO()) as f:
             self.consol.onecmd("User.update(" + my_id + ")")
-            # self.assertEqual(
-            #    "** attribute name missing **\n", f.getvalue())
+            self.assertEqual(
+                "** attribute name missing **\n", f.getvalue())
         with patch('sys.stdout', new=StringIO()) as f:
             self.consol.onecmd("User.update(" + my_id + ", name)")
-            # self.assertEqual(
-            #    "** value missing **\n", f.getvalue())
+            self.assertEqual(
+                "** value missing **\n", f.getvalue())
 
 if __name__ == "__main__":
     unittest.main()
