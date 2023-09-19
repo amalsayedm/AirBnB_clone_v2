@@ -3,8 +3,7 @@
 import cmd
 import sys
 from models.base_model import BaseModel
-from models.__init__ import storage
-#from models import storage
+from models import storage
 from models.user import User
 from models.place import Place
 from models.state import State
@@ -17,31 +16,19 @@ class HBNBCommand(cmd.Cmd):
     """ Contains the functionality for the HBNB console"""
 
     # determines prompt for interactive/non-interactive modes
-    #prompt = '(hbnb) ' if sys.__stdin__.isatty() else ''
+    prompt = '(hbnb) ' if sys.__stdin__.isatty() else ''
 
-   # classes = {
-        #       'BaseModel': BaseModel, 'User': User, 'Place': Place,
-       #        'State': State, 'City': City, 'Amenity': Amenity,
-      #         'Review': Review
-     #         }
-    #dot_cmds = ['all', 'count', 'show', 'destroy', 'update']
-   # types = {
-             #'number_rooms': int, 'number_bathrooms': int,
-             #'max_guest': int, 'price_by_night': int,
-             #'latitude': float, 'longitude': float
-            #}
-    #chnage this with
-
-    prompt = "(hbnb) "
     classes = {
-        "BaseModel",
-        "User",
-        "State",
-        "City",
-        "Amenity",
-        "Place",
-        "Review"
-    }
+               'BaseModel': BaseModel, 'User': User, 'Place': Place,
+               'State': State, 'City': City, 'Amenity': Amenity,
+               'Review': Review
+              }
+    dot_cmds = ['all', 'count', 'show', 'destroy', 'update']
+    types = {
+             'number_rooms': int, 'number_bathrooms': int,
+             'max_guest': int, 'price_by_night': int,
+             'latitude': float, 'longitude': float
+            }
 
     def preloop(self):
         """Prints if isatty is false"""
@@ -107,9 +94,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_quit(self, command):
         """ Method to exit the HBNB console"""
-        #exit()
-        #change exit() to
-        return True
+        exit()
 
     def help_quit(self):
         """ Prints the help documentation for quit  """
@@ -130,51 +115,31 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, args):
         """ Create an object of any class"""
-        #try:
-         #   if not args:
-          #      raise SyntaxError()
-           # args_list = args.split(" ")
-            #if args_list:
-             #   cls_name = args_list[0]  # extract class name
-            #else:
-             #   raise SyntaxError()
-            #kwargs = {}
-            #for pair in args_list[1:]:
-             #   key, value = pair.split("=")
-              #  if self.is_int(value):
-               #     kwargs[key] = int(value)
-                #elif self.is_float(value):
-                 #   kwargs[key] = float(value)
-                #else:
-                 #   value = value.replace('_', ' ')
-                  #  kwargs[key] = value.strip('"\'')
-                   # obj = self.classes[cls_name](**kwargs)
-                    #storage.new(obj)  # save storage to file
-                #obj.save()
-                #print(obj.id)
-        #except SyntaxError:
-         #   print("** class name missing **")
-        #except KeyError:
-         #   print("** class doesn't exist **")
-    #change this to
         try:
             if not args:
                 raise SyntaxError()
-            arg_list = args.split(" ")
-            kw = {}
-            for arg in arg_list[1:]:
-                arg_splited = arg.split("=")
-                arg_splited[1] = eval(arg_splited[1])
-                if type(arg_splited[1]) is str:
-                    arg_splited[1] = arg_splited[1].replace(
-                        "_", " ").replace('"', '\\"')
-                kw[arg_splited[0]] = arg_splited[1]
-                new_instance = HBNBCommand.classes[arg_list[0]](**kw)
-                new_instance.save()
-                print(new_instance.id)
+            args_list = args.split(" ")
+            if args_list:
+                cls_name = args_list[0]  # extract class name
+            else:
+                raise SyntaxError()
+            kwargs = {}
+            for pair in args_list[1:]:
+                key, value = pair.split("=")
+                if self.is_int(value):
+                    kwargs[key] = int(value)
+                elif self.is_float(value):
+                    kwargs[key] = float(value)
+                else:
+                    value = value.replace('_', ' ')
+                    kwargs[key] = value.strip('"\'')
+            obj = self.classes[cls_name](**kwargs)
+            storage.new(obj)  # save storage to file
+            obj.save()
+            print(obj.id)
         except SyntaxError:
             print("** class name missing **")
-        except NameError:
+        except KeyError:
             print("** class doesn't exist **")
 
     def do_show(self, args):
@@ -238,7 +203,6 @@ class HBNBCommand(cmd.Cmd):
         except KeyError:
             print("** no instance found **")
 
-
     def help_destroy(self):
         """ Help information for the destroy command """
         print("Destroys an individual instance of a class")
@@ -246,36 +210,20 @@ class HBNBCommand(cmd.Cmd):
 
     def do_all(self, args):
         """ Shows all objects, or all objects of a class"""
-        #change this to
-        #print_list = []
+        print_list = []
 
-        #if args:
-         #   args = args.split(' ')[0]  # remove possible trailing args
-          #  if args not in HBNBCommand.classes:
-           #     print("** class doesn't exist **")
-            #    return
-           # for k, v in storage.all(HBNBCommand.classes[args]).items():
-            #    print_list.append(str(v))
-        #else:
-         #   for k, v in storage.all().items():
-          #      print_list.append(str(v))
-        #print(print_list)
+        if args:
+            args = args.split(' ')[0]  # remove possible trailing args
+            if args not in HBNBCommand.classes:
+                print("** class doesn't exist **")
+                return
+            for k, v in storage.all(HBNBCommand.classes[args]).items():
+                print_list.append(str(v))
+        else:
+            for k, v in storage.all().items():
+                print_list.append(str(v))
+        print(print_list)
 
-        if not args:
-            o = storage.all()
-            print([o[k].__str__() for k in o])
-            return
-        try:
-            line = args.split(" ")
-            if line[0] not in self.classes:
-                raise NameError()
-
-            o = storage.all(eval(args[0]))
-            print([o[k].__str__() for k in o])
-
-        except NameError:
-            print("** class doesn't exist **")
-            
     def help_all(self):
         """ Help information for the all command """
         print("Shows all objects, or all of a class")
@@ -284,24 +232,10 @@ class HBNBCommand(cmd.Cmd):
     def do_count(self, args):
         """Count current number of class instances"""
         count = 0
-        #for k, v in storage._FileStorage__objects.items():
-          #  if args == k.split('.')[0]:
-         #       count += 1
-        #print(count)
-
-        #chnage with this
-        try:
-            my_list = split(line, " ")
-            if my_list[0] not in self.__classes:
-                raise NameError()
-            objects = storage.all()
-            for key in objects:
-                name = key.split('.')
-                if name[0] == my_list[0]:
-                    count += 1
-            print(count)
-        except NameError:
-            print("** class doesn't exist **")
+        for k, v in storage._FileStorage__objects.items():
+            if args == k.split('.')[0]:
+                count += 1
+        print(count)
 
     def help_count(self):
         """ """
