@@ -130,32 +130,52 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, args):
         """ Create an object of any class"""
-        try:
+        #try:
+         #   if not args:
+          #      raise SyntaxError()
+           # args_list = args.split(" ")
+            #if args_list:
+             #   cls_name = args_list[0]  # extract class name
+            #else:
+             #   raise SyntaxError()
+            #kwargs = {}
+            #for pair in args_list[1:]:
+             #   key, value = pair.split("=")
+              #  if self.is_int(value):
+               #     kwargs[key] = int(value)
+                #elif self.is_float(value):
+                 #   kwargs[key] = float(value)
+                #else:
+                 #   value = value.replace('_', ' ')
+                  #  kwargs[key] = value.strip('"\'')
+                   # obj = self.classes[cls_name](**kwargs)
+                    #storage.new(obj)  # save storage to file
+                #obj.save()
+                #print(obj.id)
+        #except SyntaxError:
+         #   print("** class name missing **")
+        #except KeyError:
+         #   print("** class doesn't exist **")
+    #change this to
+            try:
             if not args:
                 raise SyntaxError()
-            args_list = args.split(" ")
-            if args_list:
-                cls_name = args_list[0]  # extract class name
-            else:
-                raise SyntaxError()
-            kwargs = {}
-            for pair in args_list[1:]:
-                key, value = pair.split("=")
-                if self.is_int(value):
-                    kwargs[key] = int(value)
-                elif self.is_float(value):
-                    kwargs[key] = float(value)
-                else:
-                    value = value.replace('_', ' ')
-                    kwargs[key] = value.strip('"\'')
-                    obj = self.classes[cls_name](**kwargs)
-                    storage.new(obj)  # save storage to file
-                obj.save()
-                print(obj.id)
+            arg_list = args.split(" ")
+            kw = {}
+            for arg in arg_list[1:]:
+                arg_splited = arg.split("=")
+                arg_splited[1] = eval(arg_splited[1])
+                if type(arg_splited[1]) is str:
+                    arg_splited[1] = arg_splited[1].replace(
+                        "_", " ").replace('"', '\\"')
+                kw[arg_splited[0]] = arg_splited[1]
         except SyntaxError:
             print("** class name missing **")
-        except KeyError:
+        except NameError:
             print("** class doesn't exist **")
+        new_instance = HBNBCommand.classes[arg_list[0]](**kw)
+        new_instance.save()
+        print(new_instance.id)
 
     def do_show(self, args):
         """ Method to show an individual object """
