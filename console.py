@@ -157,7 +157,7 @@ class HBNBCommand(cmd.Cmd):
         #except KeyError:
          #   print("** class doesn't exist **")
     #change this to
-            try:
+        try:
             if not args:
                 raise SyntaxError()
             arg_list = args.split(" ")
