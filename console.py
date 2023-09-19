@@ -241,7 +241,7 @@ class HBNBCommand(cmd.Cmd):
           #      print_list.append(str(v))
         #print(print_list)
 
-            if not args:
+        if not args:
             o = storage.all()
             print([o[k].__str__() for k in o])
             return
