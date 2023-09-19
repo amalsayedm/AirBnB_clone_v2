@@ -17,19 +17,30 @@ class HBNBCommand(cmd.Cmd):
     """ Contains the functionality for the HBNB console"""
 
     # determines prompt for interactive/non-interactive modes
-    prompt = '(hbnb) ' if sys.__stdin__.isatty() else ''
+    #prompt = '(hbnb) ' if sys.__stdin__.isatty() else ''
 
-    classes = {
-               'BaseModel': BaseModel, 'User': User, 'Place': Place,
-               'State': State, 'City': City, 'Amenity': Amenity,
-               'Review': Review
-              }
-    dot_cmds = ['all', 'count', 'show', 'destroy', 'update']
-    types = {
-             'number_rooms': int, 'number_bathrooms': int,
-             'max_guest': int, 'price_by_night': int,
-             'latitude': float, 'longitude': float
-            }
+   # classes = {
+        #       'BaseModel': BaseModel, 'User': User, 'Place': Place,
+       #        'State': State, 'City': City, 'Amenity': Amenity,
+      #         'Review': Review
+     #         }
+    #dot_cmds = ['all', 'count', 'show', 'destroy', 'update']
+   # types = {
+             #'number_rooms': int, 'number_bathrooms': int,
+             #'max_guest': int, 'price_by_night': int,
+             #'latitude': float, 'longitude': float
+            #}
+    #chnage this with
+        prompt = "(hbnb) "
+    all_classes = {
+        "BaseModel": BaseModel,
+        "User": User,
+        "State": State,
+        "City": City,
+        "Amenity": Amenity,
+        "Place": Place,
+        "Review": Review
+    }
 
     def preloop(self):
         """Prints if isatty is false"""
