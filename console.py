@@ -235,10 +235,24 @@ class HBNBCommand(cmd.Cmd):
     def do_count(self, args):
         """Count current number of class instances"""
         count = 0
-        for k, v in storage._FileStorage__objects.items():
-            if args == k.split('.')[0]:
-                count += 1
-        print(count)
+        #for k, v in storage._FileStorage__objects.items():
+          #  if args == k.split('.')[0]:
+         #       count += 1
+        #print(count)
+
+        #chnage with this
+        try:
+            my_list = split(line, " ")
+            if my_list[0] not in self.__classes:
+                raise NameError()
+            objects = storage.all()
+            for key in objects:
+                name = key.split('.')
+                if name[0] == my_list[0]:
+                    count += 1
+            print(count)
+        except NameError:
+            print("** class doesn't exist **")
 
     def help_count(self):
         """ """
