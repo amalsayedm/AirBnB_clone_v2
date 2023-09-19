@@ -179,31 +179,57 @@ class HBNBCommand(cmd.Cmd):
 
     def do_destroy(self, args):
         """ Destroys a specified object """
-        new = args.partition(" ")
-        c_name = new[0]
-        c_id = new[2]
-        if c_id and ' ' in c_id:
-            c_id = c_id.partition(' ')[0]
+        #new = args.partition(" ")
+        #c_name = new[0]
+        #c_id = new[2]
+       # if c_id and ' ' in c_id:
+        #    c_id = c_id.partition(' ')[0]
 
-        if not c_name:
+        #if not c_name:
+         #   print("** class name missing **")
+          #  return
+
+        #if c_name not in HBNBCommand.classes:
+         #   print("** class doesn't exist **")
+          #  return
+#
+ #       if not c_id:
+  #          print("** instance id missing **")
+   #         return
+
+#        key = c_name + "." + c_id
+
+ #       try:
+#            del(storage.all()[key])
+ #           storage.save()
+  #      except KeyError:
+   #         print("** no instance found **")
+
+    #chagne this to
+     try:
+            if not args:
+                raise SyntaxError()
+            my_list = args.split(" ")
+            if my_list[0] not in self.all_classes:
+                raise NameError()
+            if len(my_list) < 2:
+                raise IndexError()
+            objects = storage.all()
+            key = my_list[0] + '.' + my_list[1]
+            if key in objects:
+                del objects[key]
+                storage.save()
+            else:
+                raise KeyError()
+        except SyntaxError:
             print("** class name missing **")
-            return
-
-        if c_name not in HBNBCommand.classes:
+        except NameError:
             print("** class doesn't exist **")
-            return
-
-        if not c_id:
+        except IndexError:
             print("** instance id missing **")
-            return
-
-        key = c_name + "." + c_id
-
-        try:
-            del(storage.all()[key])
-            storage.save()
         except KeyError:
             print("** no instance found **")
+
 
     def help_destroy(self):
         """ Help information for the destroy command """
