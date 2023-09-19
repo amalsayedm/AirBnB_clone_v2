@@ -21,7 +21,6 @@ from models.engine.file_storage import FileStorage
 import MySQLdb
 import sqlalchemy
 from models import storage
-from tests import clear_stream
 
 
 class TestConsole(unittest.TestCase):
