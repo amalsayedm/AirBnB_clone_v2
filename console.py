@@ -206,10 +206,10 @@ class HBNBCommand(cmd.Cmd):
    #         print("** no instance found **")
 
     #chagne this to
-     try:
-            if not args:
+        try:
+            if not line:
                 raise SyntaxError()
-            my_list = args.split(" ")
+            my_list = line.split(" ")
             if my_list[0] not in self.all_classes:
                 raise NameError()
             if len(my_list) < 2:
