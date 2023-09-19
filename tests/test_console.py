@@ -180,12 +180,13 @@ class TestConsole(unittest.TestCase):
     def test_z_count(self):
         """Test count command inpout"""
         """Test count command inpout"""
+        """Test count command inpout"""
         with patch('sys.stdout', new=StringIO()) as f:
-            self.HBNB.onecmd("asdfsdfsd.count()")
+            self.consol.onecmd("asdfsdfsd.count()")
             self.assertEqual(
                 "** class doesn't exist **\n", f.getvalue())
         with patch('sys.stdout', new=StringIO()) as f:
-            self.HBNB.onecmd("State.count()")
+            self.consol.onecmd("State.count()")
             self.assertEqual("0\n", f.getvalue())
 
     def test_z_show(self):
