@@ -31,15 +31,16 @@ class HBNBCommand(cmd.Cmd):
              #'latitude': float, 'longitude': float
             #}
     #chnage this with
-        prompt = "(hbnb) "
-    all_classes = {
-        "BaseModel": BaseModel,
-        "User": User,
-        "State": State,
-        "City": City,
-        "Amenity": Amenity,
-        "Place": Place,
-        "Review": Review
+
+    prompt = "(hbnb) "
+    __classes = {
+        "BaseModel",
+        "User",
+        "State",
+        "City",
+        "Amenity",
+        "Place",
+        "Review"
     }
 
     def preloop(self):
