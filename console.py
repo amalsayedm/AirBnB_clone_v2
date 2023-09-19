@@ -148,10 +148,10 @@ class HBNBCommand(cmd.Cmd):
                 else:
                     value = value.replace('_', ' ')
                     kwargs[key] = value.strip('"\'')
-            obj = self.classes[cls_name](**kwargs)
-            storage.new(obj)  # save storage to file
-            obj.save()
-            print(obj.id)
+                    obj = self.classes[cls_name](**kwargs)
+                    storage.new(obj)  # save storage to file
+                obj.save()
+                print(obj.id)
         except SyntaxError:
             print("** class name missing **")
         except KeyError:
