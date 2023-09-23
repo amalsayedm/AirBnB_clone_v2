@@ -346,10 +346,10 @@ class HBNBCommand(cmd.Cmd):
         except ValueError:
             return False
 
-    '''new code'''
+ '''new code'''
     def strip_clean(self, args):
-        """strips the argument and return a string of command
-        Args:
+	 """strips the argument and return a string of command
+	Args:
         args: input list of args
         Return:
             returns string of argumetns
