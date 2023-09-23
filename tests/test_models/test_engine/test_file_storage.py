@@ -42,13 +42,11 @@ class test_fileStorage(unittest.TestCase):
         temp = storage.all()
         self.assertIsInstance(temp, dict)
 
-    
     def test_pep8_FileStorage(self):
         """Tests pep8 style"""
         style = pep8.StyleGuide(quiet=True)
         p = style.check_files(['models/engine/file_storage.py'])
         self.assertEqual(p.total_errors, 0, "fix pep8")
-
 
     def test_base_model_instantiation(self):
         """ File is not created on BaseModel save """
