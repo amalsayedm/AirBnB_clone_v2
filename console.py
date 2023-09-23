@@ -346,31 +346,6 @@ class HBNBCommand(cmd.Cmd):
         except ValueError:
             return False
 
- '''new code'''
-    def strip_clean(self, args):
-	 """strips the argument and return a string of command
-	Args:
-        args: input list of args
-        Return:
-            returns string of argumetns
-        """
-        new_list = []
-        new_list.append(args[0])
-        try:
-            my_dict = eval(
-                args[1][args[1].find('{'):args[1].find('}')+1])
-        except Exception:
-            my_dict = None
-        if isinstance(my_dict, dict):
-            new_str = args[1][args[1].find('(')+1:args[1].find(')')]
-            new_list.append(((new_str.split(", "))[0]).strip('"'))
-            new_list.append(my_dict)
-            return new_list
-        new_str = args[1][args[1].find('(')+1:args[1].find(')')]
-        new_list.append(" ".join(new_str.split(", ")))
-        return " ".join(i for i in new_list)
-
-
 
 if __name__ == "__main__":
     HBNBCommand().cmdloop()
