@@ -38,6 +38,13 @@ class TestDBStorageDocs(unittest.TestCase):
         """Set up for the doc tests"""
         cls.dbs_f = inspect.getmembers(DBStorage, inspect.isfunction)
 
+    @unittest.skipIf(getenv("HBNB_TYPE_STORAGE") != 'db', 'NO DB')
+    def test_pep8_DBStorage(self):
+        """Test Pep8"""
+        style = pep8.StyleGuide(quiet=True)
+        p = style.check_files(['models/engine/db_storage.py'])
+        self.assertEqual(p.total_errors, 0, "fix pep8")
+
     def test_db_storage_module_docstring(self):
         """Test for the db_storage.py module docstring"""
         self.assertIsNot(db_storage.__doc__, None,
