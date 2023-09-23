@@ -16,17 +16,6 @@ class test_basemodel(unittest.TestCase):
         super().__init__(*args, **kwargs)
         self.name = 'BaseModel'
         self.value = BaseModel
-    """
-    A class to test pep8 on base_model file"""
-
-    #def test_pycodestyle(self):
-     #   """
-      #  Test pep8 format
-       # """
-        #pycostyle = pycodestyle.StyleGuide(quiet=True)
-        #result = pycostyle.check_files(['models/base_model.py'])
-        #self.assertEqual(result.total_errors, 0,
-         #                "Found code style errors (and warnings).")
 
     def setUp(self):
         """ """
@@ -137,15 +126,11 @@ class test_basemodel(unittest.TestCase):
 
 class TestCodeFormat(unittest.TestCase):
     """A class to test pep8 on base_model file"""
-
-    #def test_pycodestyle(self):
-     #   """
-      #  Test pep8 format
-       # """
-        #pycostyle = pycodestyle.StyleGuide(quiet=True)
-        #result = pycostyle.check_files(['models/base_model.py'])
-        #self.assertEqual(result.total_errors, 0,
-         #                "Found code style errors (and warnings).")
+    def test_pep8_BaseModel(self):
+        """Testing for pep8"""
+        style = pep8.StyleGuide(quiet=True)
+        p = style.check_files(['models/base_model.py'])
+        self.assertEqual(p.total_errors, 0, "fix pep8")
 
 
 class Test_docstrings(unittest.TestCase):
