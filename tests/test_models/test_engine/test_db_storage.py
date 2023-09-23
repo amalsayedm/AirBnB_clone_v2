@@ -38,7 +38,6 @@ class TestDBStorageDocs(unittest.TestCase):
         """Set up for the doc tests"""
         cls.dbs_f = inspect.getmembers(DBStorage, inspect.isfunction)
 
-    @unittest.skipIf(getenv("HBNB_TYPE_STORAGE") != 'db', 'NO DB')
     def test_pep8_DBStorage(self):
         """Test Pep8"""
         style = pep8.StyleGuide(quiet=True)
