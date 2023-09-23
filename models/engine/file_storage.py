@@ -20,7 +20,7 @@ class FileStorage:
     """
     __file_path = "file.json"
     __objects = {}
-    
+
     def __init__(self):
         """Instantiation of filestorage class"""
         self.reload()
