@@ -95,7 +95,7 @@ class HBNBCommand(cmd.Cmd):
     def do_quit(self, command):
         """ Method to exit the HBNB console"""
         return True
-        
+
     def help_quit(self):
         """ Prints the help documentation for quit  """
         print("Exits the program with formatting\n")
@@ -328,7 +328,7 @@ class HBNBCommand(cmd.Cmd):
         """ Help information for the update class """
         print("Updates an object with new information")
         print("Usage: update <className> <id> <attName> <attVal>\n")
-        
+
 # new code
     def strip_clean(self, args):
         """strips the argument and return a string of command
