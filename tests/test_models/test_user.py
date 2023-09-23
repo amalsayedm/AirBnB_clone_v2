@@ -6,6 +6,15 @@ from models.user import User
 
 class test_User(test_basemodel):
     """ """
+    @classmethod
+    def setUpClass(cls):
+        """set up for test"""
+        cls.user = User()
+        cls.user.first_name = "Kevin"
+        cls.user.last_name = "Yook"
+        cls.user.email = "yook00627@gmamil.com"
+        cls.user.password = "secret"
+
 
     def __init__(self, *args, **kwargs):
         """ """
