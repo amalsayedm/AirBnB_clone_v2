@@ -8,6 +8,7 @@ import json
 import os
 import pep8
 
+
 class test_basemodel(unittest.TestCase):
     """ """
 
