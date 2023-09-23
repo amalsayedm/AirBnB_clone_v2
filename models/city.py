@@ -1,13 +1,13 @@
 #!/usr/bin/python3
 """ City Module for HBNB project """
 from models.base_model import BaseModel, Base
-from sqlalchemy import Column, Integer, String # new code
+from sqlalchemy import Column, Integer, String  # new code
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import relationship
 from models.place import Place
 
 
-class City(BaseModel, Base): # new code
+class City(BaseModel, Base):  # new code
     """This is the class for City
     Attributes:
         state_id: The state id
