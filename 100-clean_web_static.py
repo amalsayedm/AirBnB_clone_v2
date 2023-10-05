@@ -2,8 +2,9 @@
 import os
 from fabric.api import *
 
-env.hosts = ['100.25.19.204', '54.157.159.85']
-
+env.hosts = ['54.242.177.142', '52.91.146.82']
+env.user = 'ubuntu'
+env.key_filename = '~/.ssh/school'
 
 def do_clean(number=0):
     """Delete out-of-date archives.
