@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 """ State Module for HBNB project """
-from models.base_model import BaseModel,Base
-#new code
+from models.base_model import BaseModel, Base
 from sqlalchemy.orm import relationship
 from sqlalchemy import Column, Integer, String
 import models
@@ -9,8 +8,7 @@ from models.city import City
 import shlex
 
 
-#new code
-class State(BaseModel,Base):
+class State(BaseModel, Base):  # new code
     """This is the class for State
     Attributes:
         name: input name

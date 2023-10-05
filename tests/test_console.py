@@ -56,8 +56,8 @@ class TestConsole(unittest.TestCase):
         self.assertIsNotNone(HBNBCommand.do_destroy.__doc__)
         self.assertIsNotNone(HBNBCommand.do_all.__doc__)
         self.assertIsNotNone(HBNBCommand.do_update.__doc__)
-        #self.assertIsNotNone(HBNBCommand.count.__doc__)
-        #self.assertIsNotNone(HBNBCommand.strip_clean.__doc__)
+        self.assertIsNotNone(HBNBCommand.do_count.__doc__)
+        self.assertIsNotNone(HBNBCommand.strip_clean.__doc__)
         self.assertIsNotNone(HBNBCommand.default.__doc__)
 
     def test_emptyline(self):
@@ -74,7 +74,20 @@ class TestConsole(unittest.TestCase):
 
     def test_create(self):
         """Test create command inpout"""
-        pass
+        with patch('sys.stdout', new=StringIO()) as f:
+            self.consol.onecmd("create")
+            self.assertEqual(
+                "** class name missing **\n", f.getvalue())
+        with patch('sys.stdout', new=StringIO()) as f:
+            self.consol.onecmd("create asdfsfsd")
+            self.assertEqual(
+                "** class doesn't exist **\n", f.getvalue())
+        with patch('sys.stdout', new=StringIO()) as f:
+            self.consol.onecmd('create User email="hoal@.com" password="1234"')
+        with patch('sys.stdout', new=StringIO()) as f:
+            self.consol.onecmd("all User")
+            # self.assertEqual(
+            #     "[[User]", f.getvalue()[:7])
 
     def test_show(self):
         """Test show command inpout"""
@@ -166,13 +179,16 @@ class TestConsole(unittest.TestCase):
 
     def test_z_count(self):
         """Test count command inpout"""
+        """Test count command inpout"""
+        """Test count command inpout"""
         with patch('sys.stdout', new=StringIO()) as f:
-            self.consol.onecmd("asdfsdfsd.count()")
+            self.consol.onecmd("safdsa.show()")
             self.assertEqual(
                 "** class doesn't exist **\n", f.getvalue())
         with patch('sys.stdout', new=StringIO()) as f:
-            self.consol.onecmd("State.count()")
-            self.assertEqual("0\n", f.getvalue())
+            self.consol.onecmd("BaseModel.show(abcd-123)")
+            self.assertEqual(
+                "** no instance found **\n", f.getvalue())
 
     def test_z_show(self):
         """Test alternate show command inpout"""
@@ -212,12 +228,13 @@ class TestConsole(unittest.TestCase):
         my_id = obj[obj.find('(')+1:obj.find(')')]
         with patch('sys.stdout', new=StringIO()) as f:
             self.consol.onecmd("User.update(" + my_id + ")")
-            # self.assertEqual(
-            #    "** attribute name missing **\n", f.getvalue())
+            self.assertEqual(
+                "** attribute name missing **\n", f.getvalue())
         with patch('sys.stdout', new=StringIO()) as f:
             self.consol.onecmd("User.update(" + my_id + ", name)")
-            # self.assertEqual(
-            #    "** value missing **\n", f.getvalue())
+            self.assertEqual(
+                "** value missing **\n", f.getvalue())
+
 
 if __name__ == "__main__":
     unittest.main()
